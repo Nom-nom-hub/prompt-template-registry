@@ -446,6 +446,6 @@ SOFTWARE.
 ## 🔗 Links
 
 - [Product Requirements Document](./PRD.md) - Detailed specification and implementation plan
-- [GitHub Repository](https://github.com/prompt-registry/prompt-registry) - Source code and issues
+- [GitHub Repository](https://github.com/Nom-nom-hub/prompt-template-registry) - Source code and issues
 - [npm Package](https://www.npmjs.com/package/prompt-registry) - Package installation
 - [Contributing Guide](CONTRIBUTING.md) - How to contribute to the project
