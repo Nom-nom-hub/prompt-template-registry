@@ -1,0 +1,33 @@
+{
+  "name": "prompt-registry",
+  "version": "2.0.0",
+  "description": "A library for retrieving and searching reusable prompt templates with remote synchronization",
+  "type": "module",
+  "main": "index.mjs",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "node test.mjs",
+    "sync": "node --experimental-fetch index.mjs sync",
+    "validate:prompt": "node validate-prompt.js",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["prompt", "registry", "templates", "ai", "ml", "sync", "remote"],
+  "author": "Prompt Template Registry Contributors",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0"
+  },
+  "lint-staged": {
+    "*.json": [
+      "node validate-prompt.js",
+      "git add"
+    ],
+    "*.{js,mjs}": [
+      "node test.mjs"
+    ]
+  }
+}

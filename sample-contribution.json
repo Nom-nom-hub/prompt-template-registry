@@ -1,8 +1,0 @@
-{
-  "id": "ai_ethics_discussion",
-  "description": "Facilitates thoughtful discussions about AI ethics and responsible AI development",
-  "prompt": "Engage in a discussion about {{topic}} in the context of AI ethics. Consider these aspects: {{aspects}}. Provide balanced viewpoints and suggest practical recommendations.",
-  "category": "analysis",
-  "tags": ["ai", "ethics", "discussion", "responsible"],
-  "version": "1.0.0"
-}

@@ -1,0 +1,51 @@
+# Core development scripts (users don't need these)
+add-prompt.js
+validate-prompt.js
+validate-registry.js
+
+# Development dependencies
+node_modules/
+
+# Test files
+test/
+test.mjs
+*.test.js
+*.spec.js
+
+# Git and version control
+.git/
+.gitignore
+.github/
+
+# CI/CD
+.husky/
+pre-commit
+# Documentation (users only need README.md)
+PRD.md
+REMOTE_SYNC_SPEC.md
+
+# Build artifacts
+build/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+logs/
+*.tmp
+*.temp
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Runtime data
+*.pid
+*.seed
