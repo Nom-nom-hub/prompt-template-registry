@@ -3,8 +3,8 @@
 <p align="center">
   <img src="https://img.shields.io/npm/v/prompt-registry" alt="npm version">
   <img src="https://img.shields.io/npm/dw/prompt-registry" alt="npm downloads">
-  <img src="https://img.shields.io/github/license/prompt-registry/prompt-registry" alt="license">
-  <img src="https://img.shields.io/github/stars/prompt-registry/prompt-registry" alt="GitHub stars">
+  <img src="https://img.shields.io/github/license/Nom-nom-hub/prompt-template-registry" alt="license">
+  <img src="https://img.shields.io/github/stars/Nom-nom-hub/prompt-template-registry" alt="GitHub stars">
 </p>
 
 ## ✨ Overview
@@ -264,8 +264,8 @@ We welcome contributions from the community! The **Prompt Template Registry** th
 
 1. **Clone and install dependencies:**
    ```bash
-   git clone https://github.com/prompt-registry/prompt-registry.git
-   cd prompt-template-registry
+    git clone https://github.com/Nom-nom-hub/prompt-template-registry.git
+    cd prompt-template-registry
    npm install
    ```
 
