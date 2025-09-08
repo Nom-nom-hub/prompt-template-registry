@@ -221,7 +221,7 @@ Prompts support dynamic variables using `{{variableName}}` syntax:
 
 ## 🎯 Available Prompts
 
-The registry includes **49** high-quality prompt templates across 6 categories:
+The registry includes **79** high-quality prompt templates across 6 categories:
 
 | ID | Category | Description |
 |----|----------|-------------|
@@ -397,7 +397,7 @@ Thank you for helping make AI development more efficient and standardized! 🤗
 - Core registry with JSON structure
 - npm package publication
 - Basic API (`get()`, `search()` functions)
-- 26 starter prompt templates
+- 79 prompt templates
 - TypeScript definitions
 
 ### Phase 2 🔄 **In Development**

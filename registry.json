@@ -6,14 +6,22 @@
         "description": "Generates SQL queries from natural language requests",
         "prompt": "Translate this natural language request into an SQL query:\n\nRequest: {{request}}\n\nSQL Query:",
         "category": "development",
-        "tags": ["sql", "database", "query"],
+        "tags": [
+          "sql",
+          "database",
+          "query"
+        ],
         "version": "1.0.0"
       },
       "2.0.0": {
         "description": "Generates SQL queries from natural language requests",
         "prompt": "Translate this natural language request into an SQL query. Ensure the query is optimized and secure.\n\nRequest: {{request}}\n\nSQL Query:",
         "category": "development",
-        "tags": ["sql", "database", "query"],
+        "tags": [
+          "sql",
+          "database",
+          "query"
+        ],
         "version": "2.0.0"
       }
     }
@@ -25,14 +33,22 @@
         "description": "Provides detailed explanations for given code snippets",
         "prompt": "Explain what this code does in simple terms:\n\n{{code}}\n\nExplanation:",
         "category": "development",
-        "tags": ["code", "explanation", "tutorial"],
+        "tags": [
+          "code",
+          "explanation",
+          "tutorial"
+        ],
         "version": "1.0.0"
       },
       "2.0.0": {
         "description": "Provides detailed explanations for given code snippets",
         "prompt": "Explain what this code does in simple terms (assume the user is a beginner):\n\n{{code}}\n\nExplanation:",
         "category": "development",
-        "tags": ["code", "explanation", "tutorial"],
+        "tags": [
+          "code",
+          "explanation",
+          "tutorial"
+        ],
         "version": "2.0.0"
       }
     }
@@ -44,7 +60,13 @@
         "description": "Generates REST API endpoints with CRUD operations",
         "prompt": "Generate {{operation}} API endpoints for a '{{resource}}' entity. Include proper HTTP methods, status codes, request/response formats, and error handling.\n\nTechnology stack: {{stack}}\n\nEndpoint specifications:",
         "category": "development",
-        "tags": ["api", "rest", "crud", "endpoints", "backend"],
+        "tags": [
+          "api",
+          "rest",
+          "crud",
+          "endpoints",
+          "backend"
+        ],
         "version": "1.0.0"
       }
     }
@@ -56,14 +78,22 @@
         "description": "Identifies and fixes bugs in provided code",
         "prompt": "Find and fix any bugs in this code:\n\n{{code}}\n\nFixed Code:",
         "category": "development",
-        "tags": ["debug", "fix", "code"],
+        "tags": [
+          "debug",
+          "fix",
+          "code"
+        ],
         "version": "1.0.0"
       },
       "2.0.0": {
         "description": "Identifies and fixes bugs in provided code",
         "prompt": "Find and fix any bugs in this code:\n\n{{code}}\n\nFixed Code:\n\nExplanation of changes:",
         "category": "development",
-        "tags": ["debug", "fix", "code"],
+        "tags": [
+          "debug",
+          "fix",
+          "code"
+        ],
         "version": "2.0.0"
       }
     }
@@ -75,7 +105,12 @@
         "description": "Refactors code to improve readability and maintainability",
         "prompt": "Refactor this {{language}} code to follow clean code principles:\n\n{{code}}\n\nObjectives:\n- Improve readability\n- Apply SOLID principles\n- Remove code duplication\n- Enhance maintainability\n\nRefactored Code:",
         "category": "development",
-        "tags": ["refactoring", "clean_code", "maintainability", "code_quality"],
+        "tags": [
+          "refactoring",
+          "clean_code",
+          "maintainability",
+          "code_quality"
+        ],
         "version": "1.0.0"
       }
     }
@@ -87,7 +122,11 @@
         "description": "Writes documentation for APIs",
         "prompt": "Write comprehensive API documentation for this endpoint: {{api_description}}\n\nDocumentation:",
         "category": "development",
-        "tags": ["api", "documentation", "dev"],
+        "tags": [
+          "api",
+          "documentation",
+          "dev"
+        ],
         "version": "1.0.0"
       }
     }
@@ -99,7 +138,13 @@
         "description": "Creates database schemas based on application requirements",
         "prompt": "Design a comprehensive database schema for a {{application_name}} application. Include {{tables}} core tables, relationships, indexes, and data types.\n\nRequirements: {{requirements}}\n\nSchema Design:",
         "category": "development",
-        "tags": ["database", "schema", "design", "sql", "relationships"],
+        "tags": [
+          "database",
+          "schema",
+          "design",
+          "sql",
+          "relationships"
+        ],
         "version": "1.0.0"
       }
     }
@@ -111,7 +156,12 @@
         "description": "Generates comprehensive unit tests for given code",
         "prompt": "Write unit tests for this function using {{framework}}:\n\n{{code}}\n\nTest cases should cover:\n- Happy path scenarios\n- Edge cases\n- Error conditions\n- Code coverage goals",
         "category": "development",
-        "tags": ["testing", "unit_tests", "debug", "quality_assurance"],
+        "tags": [
+          "testing",
+          "unit_tests",
+          "debug",
+          "quality_assurance"
+        ],
         "version": "1.0.0"
       }
     }
@@ -123,7 +173,12 @@
         "description": "Optimizes code for better performance and efficiency",
         "prompt": "Analyze and optimize this {{language}} code for performance:\n\n{{code}}\n\nProvide optimized version with:\n- Time complexity improvements\n- Memory usage optimizations\n- Benchmarking suggestions",
         "category": "development",
-        "tags": ["performance", "optimization", "efficiency", "code"],
+        "tags": [
+          "performance",
+          "optimization",
+          "efficiency",
+          "code"
+        ],
         "version": "1.0.0"
       }
     }
@@ -135,7 +190,12 @@
         "description": "Audits code for security vulnerabilities and best practices",
         "prompt": "Perform a security audit on this {{language}} code:\n\n{{code}}\n\nIdentify:\n- Potential vulnerabilities\n- Security best practices violations\n- Remediation suggestions\n\nSecurity Report:",
         "category": "development",
-        "tags": ["security", "audit", "vulnerabilities", "code_review"],
+        "tags": [
+          "security",
+          "audit",
+          "vulnerabilities",
+          "code_review"
+        ],
         "version": "1.0.0"
       }
     }
@@ -147,7 +207,12 @@
         "description": "Creates regex patterns for text validation and matching",
         "prompt": "Create a regex pattern to {{purpose}}.\n\nRequirements:\n- Match format: {{examples}}\n- Programming language: {{language}}\n- Include explanation and test cases\n\nRegex Pattern:",
         "category": "development",
-        "tags": ["regex", "validation", "pattern_matching", "text_processing"],
+        "tags": [
+          "regex",
+          "validation",
+          "pattern_matching",
+          "text_processing"
+        ],
         "version": "1.0.0"
       }
     }
@@ -159,7 +224,12 @@
         "description": "Implements authentication and authorization systems",
         "prompt": "Design and implement an authentication system for {{application_type}}.\n\nSecurity requirements:\n{{requirements}}\n\nInclude:\n- JWT token handling\n- Password security\n- Role-based access control\n- Session management",
         "category": "development",
-        "tags": ["authentication", "security", "jwt", "authorization"],
+        "tags": [
+          "authentication",
+          "security",
+          "jwt",
+          "authorization"
+        ],
         "version": "1.0.0"
       }
     }
@@ -171,7 +241,12 @@
         "description": "Sets up monitoring and alerting for applications",
         "prompt": "Set up monitoring and alerting for {{application_type}}.\n\nMetrics to track:\n{{metrics}}\n\nInclude:\n- Health checks\n- Performance monitoring\n- Error tracking\n- Alert thresholds\n- Dashboard setup",
         "category": "development",
-        "tags": ["monitoring", "alerting", "observability", "metrics"],
+        "tags": [
+          "monitoring",
+          "alerting",
+          "observability",
+          "metrics"
+        ],
         "version": "1.0.0"
       }
     }
@@ -183,7 +258,12 @@
         "description": "Generates optimized Dockerfiles for applications",
         "prompt": "Create an optimized Dockerfile for a {{application_type}} application.\n\nApplication details:\n- Technology: {{technology}}\n- Port: {{port}}\n- Environment: {{environment}}\n\nOptimization focus:\n- Minimal image size\n- Security best practices\n- Multi-stage builds if applicable",
         "category": "development",
-        "tags": ["docker", "containerization", "devops", "infrastructure"],
+        "tags": [
+          "docker",
+          "containerization",
+          "devops",
+          "infrastructure"
+        ],
         "version": "1.0.0"
       }
     }
@@ -195,7 +275,12 @@
         "description": "Creates CI/CD pipeline configurations for projects",
         "prompt": "Design a CI/CD pipeline for a {{technology}} project using {{platform}}.\n\nPipeline should include:\n- Build steps\n- Testing phases\n- Deployment strategies\n- Artifact management\n\nConfiguration:",
         "category": "development",
-        "tags": ["ci_cd", "pipeline", "automation", "devops"],
+        "tags": [
+          "ci_cd",
+          "pipeline",
+          "automation",
+          "devops"
+        ],
         "version": "1.0.0"
       }
     }
@@ -207,7 +292,12 @@
         "description": "Designs microservice architectures for applications",
         "prompt": "Design a microservice architecture for {{application_name}}.\n\nRequirements:\n{{requirements}}\n\nDesign elements:\n- Service boundaries\n- API gateways\n- Data consistency\n- Inter-service communication\n- Deployment considerations",
         "category": "development",
-        "tags": ["microservices", "architecture", "design", "scalability"],
+        "tags": [
+          "microservices",
+          "architecture",
+          "design",
+          "scalability"
+        ],
         "version": "1.0.0"
       }
     }
@@ -219,7 +309,12 @@
         "description": "Implements comprehensive error handling patterns in code",
         "prompt": "Implement proper error handling for this {{language}} code:\n\n{{code}}\n\nConsider:\n- Exception types\n- Error messages\n- Graceful degradation\n- Logging strategies\n\nEnhanced Code:",
         "category": "development",
-        "tags": ["error_handling", "exceptions", "robustness", "code_quality"],
+        "tags": [
+          "error_handling",
+          "exceptions",
+          "robustness",
+          "code_quality"
+        ],
         "version": "1.0.0"
       }
     }
@@ -231,7 +326,11 @@
         "description": "Creates an outline for a blog post on a given topic",
         "prompt": "Create a detailed outline for a blog post about '{{topic}}'.\n\nOutline:",
         "category": "content",
-        "tags": ["blog", "outline", "writing"],
+        "tags": [
+          "blog",
+          "outline",
+          "writing"
+        ],
         "version": "1.0.0"
       }
     }
@@ -243,7 +342,11 @@
         "description": "Generates complete articles for specified topics",
         "prompt": "Write a {{length}} article about '{{topic}}'. Include an introduction, body sections, and conclusion.\n\nArticle:",
         "category": "content",
-        "tags": ["article", "writing", "content"],
+        "tags": [
+          "article",
+          "writing",
+          "content"
+        ],
         "version": "1.0.0"
       }
     }
@@ -255,7 +358,11 @@
         "description": "Creates engaging social media posts",
         "prompt": "Create an engaging social media post about '{{topic}}'\n\nPost:",
         "category": "content",
-        "tags": ["social", "media", "marketing"],
+        "tags": [
+          "social",
+          "media",
+          "marketing"
+        ],
         "version": "1.0.0"
       }
     }
@@ -267,7 +374,11 @@
         "description": "Creates outlines for presentations",
         "prompt": "Create an outline for a presentation on '{{topic}}'\n\nPresentation Outline:",
         "category": "content",
-        "tags": ["presentation", "outline", "public_speaking"],
+        "tags": [
+          "presentation",
+          "outline",
+          "public_speaking"
+        ],
         "version": "1.0.0"
       }
     }
@@ -279,7 +390,11 @@
         "description": "Generates engaging newsletter content",
         "prompt": "Write engaging newsletter content for '{{company}}' including news highlights and upcoming events.\n\nNewsletter:",
         "category": "content",
-        "tags": ["newsletter", "content", "communication"],
+        "tags": [
+          "newsletter",
+          "content",
+          "communication"
+        ],
         "version": "1.0.0"
       }
     }
@@ -291,7 +406,12 @@
         "description": "Creates compelling marketing copy for products and services",
         "prompt": "Write marketing copy for {{product_service}}. Target audience: {{audience}}\n\nKey features to highlight:\n{{features}}\n\nTone: {{tone}}\n\nInclude:\n- Headline\n- Benefits-focused copy\n- Call-to-action\n- Social proof elements",
         "category": "content",
-        "tags": ["marketing", "copywriting", "promotion", "advertising"],
+        "tags": [
+          "marketing",
+          "copywriting",
+          "promotion",
+          "advertising"
+        ],
         "version": "1.0.0"
       }
     }
@@ -303,7 +423,12 @@
         "description": "Creates step-by-step technical tutorials and guides",
         "prompt": "Create a technical tutorial for {{technology}}. Skill level: {{level}}\n\nTutorial goals:\n{{goals}}\n\nStructure:\n- Prerequisites\n- Step-by-step instructions\n- Code examples\n- Common pitfalls\n- Best practices\n\nComplete Tutorial:",
         "category": "content",
-        "tags": ["tutorial", "technical_writing", "education", "guidance"],
+        "tags": [
+          "tutorial",
+          "technical_writing",
+          "education",
+          "guidance"
+        ],
         "version": "1.0.0"
       }
     }
@@ -315,7 +440,12 @@
         "description": "Writes detailed product descriptions for e-commerce",
         "prompt": "Write a compelling product description for {{product_name}}.\n\nProduct details:\n{{details}}\n\nTarget buyers: {{audience}}\n\nFocus on:\n- Key benefits\n- Unique features\n- Use cases\n- Technical specifications\n- Visual appeal",
         "category": "content",
-        "tags": ["product_description", "ecommerce", "sales_copy", "marketing"],
+        "tags": [
+          "product_description",
+          "ecommerce",
+          "sales_copy",
+          "marketing"
+        ],
         "version": "1.0.0"
       }
     }
@@ -327,7 +457,12 @@
         "description": "Creates comprehensive marketing campaign strategies",
         "prompt": "Create a marketing campaign strategy for {{product_service}}. Campaign goals: {{goals}}\n\nTarget audience: {{audience}}\n\nBudget: {{budget}}\n\nStrategy components:\n- Campaign themes\n- Channel selection\n- Message frameworks\n- Timeline planning\n- Success metrics\n\nComplete Strategy:",
         "category": "content",
-        "tags": ["strategy", "marketing_campaign", "brand_communication", "planning"],
+        "tags": [
+          "strategy",
+          "marketing_campaign",
+          "brand_communication",
+          "planning"
+        ],
         "version": "1.0.0"
       }
     }
@@ -339,7 +474,11 @@
         "description": "Drafts professional email responses based on context",
         "prompt": "Draft a professional email response to this situation: {{context}}\n\nEmail Response:",
         "category": "customer_service",
-        "tags": ["email", "response", "communication"],
+        "tags": [
+          "email",
+          "response",
+          "communication"
+        ],
         "version": "1.0.0"
       }
     }
@@ -351,7 +490,11 @@
         "description": "Provides suggestions for resolving customer complaints",
         "prompt": "How would you resolve this customer complaint? {{complaint}}\n\nResolution Steps:",
         "category": "customer_service",
-        "tags": ["complaint", "resolution", "support"],
+        "tags": [
+          "complaint",
+          "resolution",
+          "support"
+        ],
         "version": "1.0.0"
       }
     }
@@ -363,7 +506,11 @@
         "description": "Generates chatbot responses for given queries",
         "prompt": "Generate a helpful chatbot response to: {{query}}\n\nResponse:",
         "category": "customer_service",
-        "tags": ["chatbot", "response", "ai"],
+        "tags": [
+          "chatbot",
+          "response",
+          "ai"
+        ],
         "version": "1.0.0"
       }
     }
@@ -375,7 +522,12 @@
         "description": "Creates comprehensive customer onboarding experiences",
         "prompt": "Design a customer onboarding flow for {{product_service}}.\n\nCustomer segment: {{segment}}\n\nOnboarding stages:\n{{stages}}\n\nInclude:\n- Welcome communications\n- Setup tutorials\n- Progress tracking\n- Success metrics\n- Follow-up support\n\nComplete Onboarding Plan:",
         "category": "customer_service",
-        "tags": ["onboarding", "user_experience", "welcome_flow", "activation"],
+        "tags": [
+          "onboarding",
+          "user_experience",
+          "welcome_flow",
+          "activation"
+        ],
         "version": "1.0.0"
       }
     }
@@ -387,7 +539,12 @@
         "description": "Designs customer loyalty programs and retention strategies",
         "prompt": "Design a loyalty program for {{brand}}. Target customers: {{customers}}\n\nBusiness goals: {{goals}}\n\nProgram elements:\n- Points system\n- Rewards structure\n- Engagement activities\n- Analytics and tracking\n- Profitability analysis\n\nLoyalty Program Design:",
         "category": "customer_service",
-        "tags": ["loyalty_program", "retention", "rewards", "customer_lifecycle"],
+        "tags": [
+          "loyalty_program",
+          "retention",
+          "rewards",
+          "customer_lifecycle"
+        ],
         "version": "1.0.0"
       }
     }
@@ -399,7 +556,11 @@
         "description": "Summarizes key findings from provided data",
         "prompt": "Summarize the key findings from this data: {{data}}\n\nSummary:",
         "category": "analysis",
-        "tags": ["data", "summary", "analytics"],
+        "tags": [
+          "data",
+          "summary",
+          "analytics"
+        ],
         "version": "1.0.0"
       }
     }
@@ -411,7 +572,11 @@
         "description": "Conducts basic market research for products",
         "prompt": "Conduct market research for '{{product}}'. Include target audience, competitors, and opportunities.\n\nResearch Report:",
         "category": "analysis",
-        "tags": ["market", "research", "business"],
+        "tags": [
+          "market",
+          "research",
+          "business"
+        ],
         "version": "1.0.0"
       }
     }
@@ -423,7 +588,11 @@
         "description": "Analyzes sentiment in text passages",
         "prompt": "Analyze the sentiment of this text: {{text}}\n\nSentiment Analysis:",
         "category": "analysis",
-        "tags": ["sentiment", "analysis", "nlp"],
+        "tags": [
+          "sentiment",
+          "analysis",
+          "nlp"
+        ],
         "version": "1.0.0"
       }
     }
@@ -435,7 +604,11 @@
         "description": "Identifies trends from data sets",
         "prompt": "Identify key trends in this data set: {{data}}\n\nTrend Analysis:",
         "category": "analysis",
-        "tags": ["trend", "data", "insights"],
+        "tags": [
+          "trend",
+          "data",
+          "insights"
+        ],
         "version": "1.0.0"
       }
     }
@@ -447,7 +620,12 @@
         "description": "Conducts financial analysis and modeling",
         "prompt": "Perform a comprehensive financial analysis for {{company}}. Key metrics: {{metrics}}\n\nAnalysis timeframe: {{timeline}}\n\nInclude:\n- Profitability analysis\n- Cash flow assessment\n- Risk evaluation\n- Forecasting models\n- Investment recommendations\n\nAnalysis Report:",
         "category": "analysis",
-        "tags": ["financial_analysis", "modeling", "business_analytics", "forecasting"],
+        "tags": [
+          "financial_analysis",
+          "modeling",
+          "business_analytics",
+          "forecasting"
+        ],
         "version": "1.0.0"
       }
     }
@@ -459,7 +637,12 @@
         "description": "Provides guidance for career paths and professional development",
         "prompt": "Create career guidance for {{candidate}}. Current role: {{current_role}}\n\nCareer goals: {{goals}}\n\nGuidance areas:\n- Skill assessment\n- Path recommendations\n- Learning resources\n- Industry trends\n- Networking strategies\n\nCareer Plan:",
         "category": "analysis",
-        "tags": ["career_guidance", "professional_development", "skill_analysis", "planning"],
+        "tags": [
+          "career_guidance",
+          "professional_development",
+          "skill_analysis",
+          "planning"
+        ],
         "version": "1.0.0"
       }
     }
@@ -471,7 +654,11 @@
         "description": "Creates structured lesson plans for subjects",
         "prompt": "Create a lesson plan for teaching '{{subject}}' over {{weeks}} weeks.\n\nLesson Plan:",
         "category": "education",
-        "tags": ["lesson", "plan", "teaching"],
+        "tags": [
+          "lesson",
+          "plan",
+          "teaching"
+        ],
         "version": "1.0.0"
       }
     }
@@ -483,7 +670,11 @@
         "description": "Generates quiz questions for educational purposes",
         "prompt": "Generate 10 quiz questions on '{{topic}}' with answers.\n\nQuiz Questions:",
         "category": "education",
-        "tags": ["quiz", "questions", "assessment"],
+        "tags": [
+          "quiz",
+          "questions",
+          "assessment"
+        ],
         "version": "1.0.0"
       }
     }
@@ -495,7 +686,11 @@
         "description": "Generates research questions for topics",
         "prompt": "Generate 5 research questions on '{{topic}}'\n\nResearch Questions:",
         "category": "education",
-        "tags": ["research", "questions", "study"],
+        "tags": [
+          "research",
+          "questions",
+          "study"
+        ],
         "version": "1.0.0"
       }
     }
@@ -507,7 +702,11 @@
         "description": "Solves and explains mathematical problems",
         "prompt": "Solve this math problem step by step: {{problem}}\n\nSolution:",
         "category": "education",
-        "tags": ["math", "problem", "solution"],
+        "tags": [
+          "math",
+          "problem",
+          "solution"
+        ],
         "version": "1.0.0"
       }
     }
@@ -519,7 +718,12 @@
         "description": "Creates structured curriculum paths for learning programs",
         "prompt": "Design a comprehensive curriculum for {{subject}}. Student level: {{level}}\n\nLearning objectives: {{objectives}}\n\nCurriculum structure:\n- Modules and topics\n- Learning progression\n- Assessment methods\n- Resources and materials\n- Timeline and milestones\n\nComplete Curriculum:",
         "category": "education",
-        "tags": ["curriculum", "learning_design", "course_structure", "educational_plan"],
+        "tags": [
+          "curriculum",
+          "learning_design",
+          "course_structure",
+          "educational_plan"
+        ],
         "version": "1.0.0"
       }
     }
@@ -531,7 +735,12 @@
         "description": "Creates engaging interactive lessons with activities",
         "prompt": "Design an interactive lesson on {{topic}}. Duration: {{duration}}\n\nStudent age group: {{age_group}}\n\nLearning goals: {{goals}}\n\nInclude:\n- Opening engagement\n- Core activities\n- Interactive elements\n- Assessment opportunities\n- Materials needed\n- Extension activities\n\nInteractive Lesson Plan:",
         "category": "education",
-        "tags": ["interactive_learning", "engagement", "activities", "student_centered"],
+        "tags": [
+          "interactive_learning",
+          "engagement",
+          "activities",
+          "student_centered"
+        ],
         "version": "1.0.0"
       }
     }
@@ -543,7 +752,11 @@
         "description": "Generates creative stories based on genre and opening",
         "prompt": "Write a {{genre}} story that starts with: '{{opening}}'\n\nStory:",
         "category": "creative",
-        "tags": ["story", "creative", "fiction"],
+        "tags": [
+          "story",
+          "creative",
+          "fiction"
+        ],
         "version": "1.0.0"
       }
     }
@@ -553,9 +766,13 @@
     "versions": {
       "1.0.0": {
         "description": "Creates poems on specified themes",
-        "prompt": "Write a poem about '{{theme}}'\n\nPoem:",
+        "prompt": "Write a creative poem about '{{theme}}'.\n\nInclude:\n- Rhyming words where appropriate\n- Vivid imagery\n- Emotional depth\n- Structure with stanzas\n\nPoem:",
         "category": "creative",
-        "tags": ["poem", "creative", "art"],
+        "tags": [
+          "poem",
+          "creative",
+          "art"
+        ],
         "version": "1.0.0"
       }
     }
@@ -567,7 +784,11 @@
         "description": "Describes logo designs for brands",
         "prompt": "Describe a logo design for a '{{brand}}' in '{{industry}}'\n\nLogo Description:",
         "category": "creative",
-        "tags": ["logo", "design", "brand"],
+        "tags": [
+          "logo",
+          "design",
+          "brand"
+        ],
         "version": "1.0.0"
       }
     }
@@ -579,7 +800,11 @@
         "description": "Suggests music compositions for scenarios",
         "prompt": "Suggest a music composition for '{{scenario}}'\n\nComposition Idea:",
         "category": "creative",
-        "tags": ["music", "composition", "art"],
+        "tags": [
+          "music",
+          "composition",
+          "art"
+        ],
         "version": "1.0.0"
       }
     }
@@ -591,7 +816,12 @@
         "description": "Creates detailed character profiles and designs",
         "prompt": "Design a compelling character for {{story_type}}. Character role: {{role}}\n\nCharacter profile:\n- Background and history\n- Personality traits\n- Motivations and goals\n- Strengths and flaws\n- Physical description\n- Development arc\n\nComplete Character Profile:",
         "category": "creative",
-        "tags": ["character_design", "storytelling", "character_development", "fiction"],
+        "tags": [
+          "character_design",
+          "storytelling",
+          "character_development",
+          "fiction"
+        ],
         "version": "1.0.0"
       }
     }
@@ -603,8 +833,644 @@
         "description": "Creates comprehensive brand identity systems",
         "prompt": "Develop a complete brand identity for {{brand}}. Brand personality: {{personality}}\n\nIdentity elements:\n- Brand mission and values\n- Visual style guide\n- Communication guidelines\n- Brand voice\n- Target audience alignment\n- Execution examples\n\nBrand Identity System:",
         "category": "creative",
-        "tags": ["brand_identity", "design_system", "visual_guidelines", "brand_strategy"],
+        "tags": [
+          "brand_identity",
+          "design_system",
+          "visual_guidelines",
+          "brand_strategy"
+        ],
         "version": "1.0.0"
+      }
+    }
+  },
+  "sql_query_generator": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Generates SQL queries from natural language descriptions",
+        "prompt": "Create a SQL query that achieves the following: {{description}}\n\nConsider these requirements: {{requirements}}\n\nOptimized SQL Query:",
+        "category": "development",
+        "tags": [
+          "sql",
+          "database",
+          "query",
+          "optimization"
+        ],
+        "variables": [
+          "description",
+          "requirements"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "regex_pattern_creator": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates regex patterns for text matching and validation",
+        "prompt": "Create a regex pattern to match {{pattern_description}} in {{programming_language}}.\n\nTest cases:\n{{test_cases}}\n\nRegex Pattern:",
+        "category": "development",
+        "tags": [
+          "regex",
+          "pattern",
+          "validation",
+          "text"
+        ],
+        "variables": [
+          "pattern_description",
+          "programming_language",
+          "test_cases"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "api_design_specification": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Designs REST API specifications with endpoints and schemas",
+        "prompt": "Design a REST API specification for {{api_purpose}}.\n\nInclude:\n- HTTP methods\n- Endpoint paths\n- Request/response schemas\n- Error codes\n\nAPI Specification:",
+        "category": "development",
+        "tags": [
+          "api",
+          "rest",
+          "design",
+          "specification"
+        ],
+        "variables": [
+          "api_purpose"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "code_debugging_assistant": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Identifies and fixes bugs in code with explanations",
+        "prompt": "Debug this {{language}} code. The expected behavior is {{expected_behavior}}, but it's producing {{actual_behavior}}.\n\nCode:\n{{code}}\n\nFixed Code:",
+        "category": "development",
+        "tags": [
+          "debug",
+          "code",
+          "fix",
+          "bug"
+        ],
+        "variables": [
+          "language",
+          "expected_behavior",
+          "actual_behavior",
+          "code"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "docker_containerization": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates Dockerfile configurations for applications",
+        "prompt": "Create an optimized Dockerfile for a {{technology_stack}} application.\n\nRequirements:\n- Multi-stage build\n- Security best practices\n- Performance optimizations\n\nDockerfile:",
+        "category": "development",
+        "tags": [
+          "docker",
+          "containerization",
+          "infrastructure",
+          "deployment"
+        ],
+        "variables": [
+          "technology_stack"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "blog_outline_generator": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates structured outlines for blog posts",
+        "prompt": "Create a detailed outline for a blog post about '{{topic}}'\n\nTarget audience: {{audience}}\n\nLength: {{word_count}} words\n\nOutline:",
+        "category": "content",
+        "tags": [
+          "blog",
+          "outline",
+          "structure",
+          "writing"
+        ],
+        "variables": [
+          "topic",
+          "audience",
+          "word_count"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "marketing_email_writer": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Composes compelling marketing emails",
+        "prompt": "Write a marketing email for {{product_service}}.\n\nSubject: {{subject}}\n\nKey message: {{message}}\n\nCall to action: {{cta}}\n\nEmail Content:",
+        "category": "content",
+        "tags": [
+          "email",
+          "marketing",
+          "copywriting",
+          "campaign"
+        ],
+        "variables": [
+          "product_service",
+          "subject",
+          "message",
+          "cta"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "video_script_writer": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates engaging video scripts for various formats",
+        "prompt": "Write a video script for {{video_type}} about '{{topic}}'.\n\nDuration: {{duration}}\n\nTarget audience: {{audience}}\n\nTone: {{tone}}\n\nVideo Script:",
+        "category": "content",
+        "tags": [
+          "video",
+          "script",
+          "storytelling",
+          "multimedia"
+        ],
+        "variables": [
+          "video_type",
+          "topic",
+          "duration",
+          "audience",
+          "tone"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "press_release_drafter": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Drafts professional press releases",
+        "prompt": "Write a press release for {{company}} about {{announcement}}.\n\nKey facts:\n{{facts}}\n\nQuotes from {{spokesperson}}\n\nPress Release:",
+        "category": "content",
+        "tags": [
+          "press_release",
+          "communication",
+          "journalism",
+          "media"
+        ],
+        "variables": [
+          "company",
+          "announcement",
+          "facts",
+          "spokesperson"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "content_seo_optimizer": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Optimizes content for search engine visibility",
+        "prompt": "Optimize this content for SEO targeting '{{keyword}}'\n\nOriginal content:\n{{content}}\n\nOptimize for:\n- Title and headings\n- Keyword density\n- Meta description\n- Internal/external links\n\nOptimized Content:",
+        "category": "content",
+        "tags": [
+          "seo",
+          "optimization",
+          "keywords",
+          "search"
+        ],
+        "variables": [
+          "keyword",
+          "content"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "customer_support_response": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates empathetic and helpful customer service responses",
+        "prompt": "Respond to this customer inquiry about {{issue}}.\n\nInquiry details: {{details}}\n\nCustomer history: {{history}}\n\nResponse tone: {{tone}}\n\nCustomer Response:",
+        "category": "customer_service",
+        "tags": [
+          "customer_service",
+          "response",
+          "support",
+          "empathy"
+        ],
+        "variables": [
+          "issue",
+          "details",
+          "history",
+          "tone"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "complaint_handling_template": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Provides structured approaches to handling customer complaints",
+        "prompt": "Handle this customer complaint: '{{complaint}}'\n\nProduct/service: {{product}}\n\nCustomer sentiment: {{sentiment}}\n\nResolution strategy based on {{policy}}\n\nResolution Plan:",
+        "category": "customer_service",
+        "tags": [
+          "complaint",
+          "resolution",
+          "satisfaction",
+          "service"
+        ],
+        "variables": [
+          "complaint",
+          "product",
+          "sentiment",
+          "policy"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "feedback_analysis": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Analyzes customer feedback for insights and action items",
+        "prompt": "Analyze this customer feedback: '{{feedback}}'\n\nProduct/area: {{product_area}}\n\nIdentify:\n- Main concern\n- Sentiment\n- Urgency\n- Recommended actions\n\nFeedback Analysis:",
+        "category": "customer_service",
+        "tags": [
+          "feedback",
+          "analysis",
+          "insight",
+          "improvement"
+        ],
+        "variables": [
+          "feedback",
+          "product_area"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "support_ticket_prioritization": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Prioritizes support tickets based on impact and urgency",
+        "prompt": "Prioritize this support ticket:\n\nTitle: '{{title}}'\n\nDescription: {{description}}\n\nCustomer tier: {{tier}}\n\nBusiness impact: {{impact}}\n\nPriority level:",
+        "category": "customer_service",
+        "tags": [
+          "support",
+          "prioritization",
+          "ticket",
+          "triage"
+        ],
+        "variables": [
+          "title",
+          "description",
+          "tier",
+          "impact"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "service_quality_review": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Reviews customer service interactions for quality improvement",
+        "prompt": "Review this customer service interaction:\n\n{{interaction}}\n\nEvaluate:\n- Professionalism\n- Problem resolution\n- Communication quality\n- Customer satisfaction\n\nReview Report:",
+        "category": "customer_service",
+        "tags": [
+          "quality",
+          "review",
+          "service",
+          "evaluation"
+        ],
+        "variables": [
+          "interaction"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "text_summarizer": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates concise summaries of lengthy text content",
+        "prompt": "Summarize this text in {{word_count}} words or less:\n\n{{text}}\n\nFocus on: {{key_points}}\n\nSummary:",
+        "category": "analysis",
+        "tags": [
+          "summary",
+          "text",
+          "condensation",
+          "information"
+        ],
+        "variables": [
+          "word_count",
+          "text",
+          "key_points"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "competitor_analysis": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Analyzes competitors for market positioning insights",
+        "prompt": "Analyze {{competitor}} in the {{industry}} industry.\n\nAspects to cover:\n- Strengths and weaknesses\n- Market share\n- Pricing strategy\n- Customer sentiment\n- Opportunities and threats\n\nAnalysis Report:",
+        "category": "analysis",
+        "tags": [
+          "competitor",
+          "analysis",
+          "market",
+          "strategy"
+        ],
+        "variables": [
+          "competitor",
+          "industry"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "lesson_plan_creator": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates comprehensive lesson plans for educational content",
+        "prompt": "Create a lesson plan for {{subject}} at {{skill_level}} level.\n\nLearning objectives: {{objectives}}\n\nDuration: {{duration}}\n\nMaterials needed: {{materials}}\n\nLesson Plan:",
+        "category": "education",
+        "tags": [
+          "lesson",
+          "plan",
+          "teaching",
+          "curriculum"
+        ],
+        "variables": [
+          "subject",
+          "skill_level",
+          "objectives",
+          "duration",
+          "materials"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "assessment_quiz_builder": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates assessment quizzes with various question types",
+        "prompt": "Create a quiz on {{topic}} with {{num_questions}} questions.\n\nDifficulty: {{difficulty}}\n\nQuestion types: {{types}}\n\nInclude answer keys and explanations.\n\nQuiz:",
+        "category": "education",
+        "tags": [
+          "quiz",
+          "assessment",
+          "questions",
+          "learning"
+        ],
+        "variables": [
+          "topic",
+          "num_questions",
+          "difficulty",
+          "types"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "flashcard_creator": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Generates flashcards for effective memorization",
+        "prompt": "Create {{num_flashcards}} flashcards for {{topic}}.\n\nFormat: Front/Back\n\nFocus on: {{focus_area}}\n\nFlashcards:",
+        "category": "education",
+        "tags": [
+          "flashcards",
+          "memorization",
+          "study",
+          "quiz"
+        ],
+        "variables": [
+          "num_flashcards",
+          "topic",
+          "focus_area"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "short_story_writer": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates engaging short stories with plot structure",
+        "prompt": "Write a {{genre}} short story with the premise: '{{premise}}'.\n\nProtagonist: {{protagonist}}\n\nTheme: {{theme}}\n\nTarget length: {{length}} words\n\nStory:",
+        "category": "creative",
+        "tags": [
+          "story",
+          "fiction",
+          "narrative",
+          "plot"
+        ],
+        "variables": [
+          "genre",
+          "premise",
+          "protagonist",
+          "theme",
+          "length"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "poetry_composer": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Composes creative poetry with various styles",
+        "prompt": "Write a {{poem_type}} poem about '{{subject}}'.\n\nStyle: {{style}}\n\nRhyme scheme: {{rhyme}}\n\nLength: {{stanzas}} stanzas\n\nPoem:",
+        "category": "creative",
+        "tags": [
+          "poetry",
+          "verse",
+          "rhyme",
+          "literary"
+        ],
+        "variables": [
+          "poem_type",
+          "subject",
+          "style",
+          "rhyme",
+          "stanzas"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "brand_naming_assistant": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Suggests compelling brand names and taglines",
+        "prompt": "Suggest brand names for {{product_type}}.\n\nBrand personality: {{personality}}\n\nTarget demographic: {{demographic}}\n\nInclude taglines and domain availability.\n\nBrand Suggestions:",
+        "category": "creative",
+        "tags": [
+          "brand",
+          "name",
+          "tagline",
+          "identity"
+        ],
+        "variables": [
+          "product_type",
+          "personality",
+          "demographic"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "advertising_copy_generator": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates persuasive advertising copy for products",
+        "prompt": "Write advertising copy for {{product}}.\n\nTarget audience: {{audience}}\n\nKey benefit: {{benefit}}\n\nTone: {{tone}}\n\nHeadline and copy:",
+        "category": "content",
+        "tags": [
+          "advertising",
+          "copy",
+          "persuasion",
+          "marketing"
+        ],
+        "variables": [
+          "product",
+          "audience",
+          "benefit",
+          "tone"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "business_plan_outline": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Creates structured business plan outlines",
+        "prompt": "Create a business plan outline for {{business_idea}}.\n\nIndustry: {{industry}}\n\nTarget market: {{market}}\n\nCompetition: {{competition}}\n\nBusiness Plan:",
+        "category": "analysis",
+        "tags": [
+          "business_plan",
+          "entrepreneurship",
+          "strategy",
+          "planning"
+        ],
+        "variables": [
+          "business_idea",
+          "industry",
+          "market",
+          "competition"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
+      }
+    }
+  },
+  "interview_question_preparer": {
+    "latest": "1.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Generates interview questions for various roles",
+        "prompt": "Generate {{num_questions}} interview questions for {{role}}.\n\nExperience level: {{level}}\n\nInclude behavioral and technical questions.\n\nInterview Questions:",
+        "category": "analysis",
+        "tags": [
+          "interview",
+          "questions",
+          "recruitment",
+          "assessment"
+        ],
+        "variables": [
+          "num_questions",
+          "role",
+          "level"
+        ],
+        "version": "1.0.0",
+        "author": "registry_team",
+        "last_updated": "2025-09-08T07:42:01.347Z"
       }
     }
   }
