@@ -9,6 +9,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { analyzePrompt } from './quality-analysis.js';
 
 // CLI Tool Version
 const CLI_VERSION = '1.0.0';
@@ -42,6 +43,27 @@ function isValidVersion(version) {
 }
 
 /**
+ * Compares semantic versions
+ * @param {string} a - Version string A
+ * @param {string} b - Version string B
+ * @returns {number} -1 if a < b, 0 if equal, 1 if a > b
+ */
+function compareVersions(a, b) {
+  const aParts = a.split('.').map(Number);
+  const bParts = b.split('.').map(Number);
+
+  for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+    const aPart = aParts[i] || 0;
+    const bPart = bParts[i] || 0;
+
+    if (aPart > bPart) return 1;
+    if (aPart < bPart) return -1;
+  }
+
+  return 0;
+}
+
+/**
  * Extracts variables from prompt template
  * @param {string} prompt - The prompt template
  * @returns {string[]} Array of variable names
@@ -54,9 +76,10 @@ function extractVariables(prompt) {
 /**
  * Validates prompt data against schema
  * @param {object} promptData - The prompt data to validate
+ * @param {object} registry - Optional registry to check against for version conflicts
  * @returns {object} Validation result with errors and warnings
  */
-function validatePrompt(promptData) {
+function validatePrompt(promptData, registry = null) {
   const errors = [];
   const warnings = [];
 
@@ -177,6 +200,23 @@ function validatePrompt(promptData) {
     warnings.push('Prompt contains placeholder text that should be replaced with actual content');
   }
 
+  // If registry is provided, check for version conflicts
+  if (registry && registry[promptData.id]) {
+    const existingEntry = registry[promptData.id];
+    const existingVersions = Object.keys(existingEntry.versions);
+    
+    // Check if this version already exists
+    if (existingVersions.includes(promptData.version)) {
+      warnings.push(`Version ${promptData.version} already exists for this prompt. This will overwrite the existing version.`);
+    }
+    
+    // Check version progression logic
+    const versionComparison = compareVersions(promptData.version, existingEntry.latest);
+    if (versionComparison < 0) {
+      warnings.push(`This version (${promptData.version}) is older than the current latest version (${existingEntry.latest}). This will not become the new latest version.`);
+    }
+  }
+
   return {
     isValid: errors.length === 0,
     errors,
@@ -184,7 +224,8 @@ function validatePrompt(promptData) {
     metadata: {
       variables: uniqueVariables,
       wordCount: prompt.split(/\s+/).filter(word => word.length > 0).length
-    }
+    },
+    quality: errors.length === 0 ? analyzePrompt(promptData) : null
   };
 }
 
@@ -286,6 +327,26 @@ function main() {
     if (result.metadata) {
       console.log(`📊 Metadata: ${result.metadata.variables.length} variables, ${result.metadata.wordCount} words`);
     }
+    
+    // Display quality analysis
+    if (result.quality) {
+      console.log('\n📈 Quality Analysis:');
+      console.log(`  Overall Score: ${result.quality.quality}/100`);
+      if (result.quality.quality >= 90) {
+        console.log('  🌟 Excellent quality prompt!');
+      } else if (result.quality.quality >= 70) {
+        console.log('  👍 Good quality prompt');
+      } else if (result.quality.quality >= 50) {
+        console.log('  ⚠️  Fair quality prompt');
+      } else {
+        console.log('  ❌ Poor quality prompt');
+      }
+      
+      console.log(`  Readability: ${result.quality.breakdown.readability.toFixed(1)}/100`);
+      console.log(`  Variables: ${result.quality.metrics.variables}`);
+      console.log(`  Length: ${result.quality.metrics.length} characters`);
+    }
+    
     if (result.warnings.length > 0) {
       console.log('\nℹ️  Consider addressing the warnings above for better quality.');
     }

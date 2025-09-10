@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Template Registry - Submit Prompt</title>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #818cf8;
+            --background-color: #f8fafc;
+            --card-color: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #cbd5e1;
+        }
+
+        .tag-input {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-input input {
+            flex: 1;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: #ede9fe;
+            color: #6d28d9;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+
+        .tag .remove-tag {
+            margin-left: 0.5rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .notification {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .notification.success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .notification.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        .notification.warning {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #f59e0b;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .quality-meter {
+            height: 10px;
+            background-color: #e5e7eb;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .quality-level {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .quality-excellent { background-color: var(--success-color); }
+        .quality-good { background-color: #3b82f6; }
+        .quality-fair { background-color: var(--warning-color); }
+        .quality-poor { background-color: var(--error-color); }
+
+        .suggestions {
+            background-color: #fffbeb;
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .suggestions h3 {
+            margin-bottom: 0.5rem;
+            color: #92400e;
+        }
+
+        .suggestions ul {
+            padding-left: 1.5rem;
+        }
+
+        .suggestions li {
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>📝 Submit a New Prompt</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="notification hidden" id="notification">
+            <span id="notificationMessage"></span>
+        </div>
+
+        <form id="promptForm">
+            <div class="card">
+                <h2>Prompt Details</h2>
+                
+                <div class="form-group">
+                    <label for="promptId">Prompt ID *</label>
+                    <input type="text" id="promptId" placeholder="snake_case_identifier" required>
+                    <small>Use lowercase letters, numbers, and underscores only</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="promptDescription">Description *</label>
+                    <input type="text" id="promptDescription" placeholder="Brief description of what this prompt does" required>
+                    <small>10-200 characters</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="promptTemplate">Prompt Template *</label>
+                    <textarea id="promptTemplate" placeholder="Enter your prompt template with {{variables}} for substitution" required></textarea>
+                    <small>Minimum 50 characters</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="promptCategory">Category *</label>
+                    <select id="promptCategory" required>
+                        <option value="">Select a category</option>
+                        <option value="development">Development</option>
+                        <option value="content">Content</option>
+                        <option value="customer_service">Customer Service</option>
+                        <option value="analysis">Analysis</option>
+                        <option value="creative">Creative</option>
+                        <option value="education">Education</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Tags</label>
+                    <div class="tag-input">
+                        <input type="text" id="tagInput" placeholder="Add a tag">
+                        <button type="button" id="addTagBtn" class="btn-secondary">Add</button>
+                    </div>
+                    <div class="tags-container" id="tagsContainer">
+                        <!-- Tags will be added here -->
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="promptVersion">Version</label>
+                    <input type="text" id="promptVersion" value="1.0.0" placeholder="1.0.0" required>
+                    <small>Follow semantic versioning (MAJOR.MINOR.PATCH)</small>
+                </div>
+                
+                <button type="submit">Validate and Submit Prompt</button>
+            </div>
+            
+            <div class="card hidden" id="qualityAnalysisCard">
+                <h2>🔍 Quality Analysis</h2>
+                <div class="form-group">
+                    <label>Overall Quality Score: <span id="qualityScore">0</span>/100</label>
+                    <div class="quality-meter">
+                        <div class="quality-level" id="qualityLevel"></div>
+                    </div>
+                </div>
+                
+                <div id="qualitySuggestions" class="suggestions hidden">
+                    <h3>Suggestions for Improvement</h3>
+                    <ul id="suggestionsList"></ul>
+                </div>
+                
+                <button type="button" id="revisePromptBtn" class="btn-secondary">Revise Prompt</button>
+                <button type="button" id="submitAnywayBtn">Submit Anyway</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // DOM elements
+        const promptForm = document.getElementById('promptForm');
+        const promptId = document.getElementById('promptId');
+        const promptDescription = document.getElementById('promptDescription');
+        const promptTemplate = document.getElementById('promptTemplate');
+        const promptCategory = document.getElementById('promptCategory');
+        const tagInput = document.getElementById('tagInput');
+        const addTagBtn = document.getElementById('addTagBtn');
+        const tagsContainer = document.getElementById('tagsContainer');
+        const promptVersion = document.getElementById('promptVersion');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const qualityAnalysisCard = document.getElementById('qualityAnalysisCard');
+        const qualityScore = document.getElementById('qualityScore');
+        const qualityLevel = document.getElementById('qualityLevel');
+        const qualitySuggestions = document.getElementById('qualitySuggestions');
+        const suggestionsList = document.getElementById('suggestionsList');
+        const revisePromptBtn = document.getElementById('revisePromptBtn');
+        const submitAnywayBtn = document.getElementById('submitAnywayBtn');
+
+        // Global state
+        let tags = [];
+
+        // Initialize the form
+        function init() {
+            // Set up event listeners
+            addTagBtn.addEventListener('click', addTag);
+            tagInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addTag();
+                }
+            });
+            
+            promptForm.addEventListener('submit', validateAndSubmit);
+            revisePromptBtn.addEventListener('click', revisePrompt);
+            submitAnywayBtn.addEventListener('click', submitPrompt);
+            
+            // Auto-generate ID from description
+            promptDescription.addEventListener('input', generateIdFromDescription);
+        }
+
+        // Add a tag
+        function addTag() {
+            const tag = tagInput.value.trim().toLowerCase();
+            
+            if (tag && !tags.includes(tag)) {
+                tags.push(tag);
+                renderTags();
+                tagInput.value = '';
+            }
+        }
+
+        // Remove a tag
+        function removeTag(tagToRemove) {
+            tags = tags.filter(tag => tag !== tagToRemove);
+            renderTags();
+        }
+
+        // Render tags
+        function renderTags() {
+            tagsContainer.innerHTML = '';
+            
+            tags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.className = 'tag';
+                tagElement.innerHTML = `
+                    ${tag}
+                    <span class="remove-tag" data-tag="${tag}">×</span>
+                `;
+                
+                const removeBtn = tagElement.querySelector('.remove-tag');
+                removeBtn.addEventListener('click', () => {
+                    removeTag(tag);
+                });
+                
+                tagsContainer.appendChild(tagElement);
+            });
+        }
+
+        // Generate ID from description
+        function generateIdFromDescription() {
+            const description = promptDescription.value.trim();
+            if (description) {
+                let id = description
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s]/g, '')
+                    .replace(/\s+/g, '_')
+                    .replace(/_+/g, '_')
+                    .replace(/^_|_$/g, '');
+                
+                // Limit to reasonable length
+                if (id.length > 30) {
+                    id = id.substring(0, 30);
+                    // Remove trailing underscore if present
+                    id = id.replace(/_$/, '');
+                }
+                
+                // Ensure it starts with a letter
+                if (id && !/^[a-z]/.test(id)) {
+                    id = 'prompt_' + id;
+                }
+                
+                promptId.value = id || 'new_prompt';
+            }
+        }
+
+        // Validate and submit the prompt
+        function validateAndSubmit(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            if (!promptId.value || !promptDescription.value || !promptTemplate.value || !promptCategory.value) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            // Validate ID format
+            if (!/^[a-z][a-z0-9_]*$/.test(promptId.value)) {
+                showNotification('Invalid ID format. Use lowercase letters, numbers, and underscores only', 'error');
+                return;
+            }
+            
+            // Validate version format
+            if (!/^[0-9]+\.[0-9]+\.[0-9]+$/.test(promptVersion.value)) {
+                showNotification('Invalid version format. Use semantic versioning (e.g., 1.0.0)', 'error');
+                return;
+            }
+            
+            // Validate prompt length
+            if (promptTemplate.value.length < 50) {
+                showNotification('Prompt template must be at least 50 characters long', 'error');
+                return;
+            }
+            
+            // Validate description length
+            if (promptDescription.value.length < 10 || promptDescription.value.length > 200) {
+                showNotification('Description must be between 10 and 200 characters', 'error');
+                return;
+            }
+            
+            // Perform quality analysis
+            const quality = analyzePromptQuality();
+            
+            // Show quality analysis
+            showQualityAnalysis(quality);
+            
+            // If quality is poor, show suggestions
+            if (quality.score < 50) {
+                showQualitySuggestions(quality.suggestions);
+            }
+        }
+
+        // Analyze prompt quality
+        function analyzePromptQuality() {
+            const promptData = {
+                id: promptId.value,
+                description: promptDescription.value,
+                prompt: promptTemplate.value,
+                category: promptCategory.value,
+                tags: tags,
+                version: promptVersion.value
+            };
+            
+            // Calculate quality score
+            let score = 100;
+            const suggestions = [];
+            
+            // Length checks
+            if (promptTemplate.value.length < 100) {
+                score -= 10;
+                suggestions.push('Consider making the prompt more detailed for better results');
+            }
+            
+            if (promptTemplate.value.length > 2000) {
+                score -= 15;
+                suggestions.push('Prompt is quite long. Consider breaking it into smaller components');
+            }
+            
+            // Variable checks
+            const variables = (promptTemplate.value.match(/\{\{([^}]+)\}\}/g) || []).length;
+            if (variables === 0) {
+                score -= 20;
+                suggestions.push('Add variables ({{variable_name}}) to make the prompt more reusable');
+            } else if (variables > 5) {
+                score -= 10;
+                suggestions.push('Consider reducing the number of variables for simplicity');
+            }
+            
+            // Description checks
+            if (promptDescription.value.length < 30) {
+                score -= 10;
+                suggestions.push('Make the description more descriptive to help others understand the prompt');
+            }
+            
+            // Tag checks
+            if (tags.length === 0) {
+                score -= 15;
+                suggestions.push('Add tags to improve discoverability');
+            } else if (tags.length > 5) {
+                score -= 5;
+                suggestions.push('Consider reducing the number of tags for better focus');
+            }
+            
+            // Placeholder checks
+            if (promptTemplate.value.toLowerCase().includes('todo') || 
+                promptTemplate.value.toLowerCase().includes('placeholder')) {
+                score -= 25;
+                suggestions.push('Remove placeholder text and replace with actual content');
+            }
+            
+            // Ensure score is between 0 and 100
+            score = Math.max(0, Math.min(100, score));
+            
+            return {
+                score,
+                suggestions
+            };
+        }
+
+        // Show quality analysis
+        function showQualityAnalysis(quality) {
+            qualityScore.textContent = quality.score;
+            
+            // Set quality level width and class
+            qualityLevel.style.width = quality.score + '%';
+            
+            // Set quality level class based on score
+            qualityLevel.className = 'quality-level';
+            if (quality.score >= 90) {
+                qualityLevel.classList.add('quality-excellent');
+            } else if (quality.score >= 70) {
+                qualityLevel.classList.add('quality-good');
+            } else if (quality.score >= 50) {
+                qualityLevel.classList.add('quality-fair');
+            } else {
+                qualityLevel.classList.add('quality-poor');
+            }
+            
+            qualityAnalysisCard.classList.remove('hidden');
+        }
+
+        // Show quality suggestions
+        function showQualitySuggestions(suggestions) {
+            suggestionsList.innerHTML = '';
+            
+            if (suggestions.length > 0) {
+                suggestions.forEach(suggestion => {
+                    const li = document.createElement('li');
+                    li.textContent = suggestion;
+                    suggestionsList.appendChild(li);
+                });
+                
+                qualitySuggestions.classList.remove('hidden');
+            } else {
+                qualitySuggestions.classList.add('hidden');
+            }
+        }
+
+        // Revise prompt
+        function revisePrompt() {
+            qualityAnalysisCard.classList.add('hidden');
+            qualitySuggestions.classList.add('hidden');
+        }
+
+        // Submit prompt
+        function submitPrompt() {
+            // In a real implementation, this would submit to the registry
+            showNotification('Prompt submitted successfully! Thank you for your contribution.', 'success');
+            
+            // Reset form
+            promptForm.reset();
+            tags = [];
+            renderTags();
+            qualityAnalysisCard.classList.add('hidden');
+            qualitySuggestions.classList.add('hidden');
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            notificationMessage.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.remove('hidden');
+            
+            // Hide notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

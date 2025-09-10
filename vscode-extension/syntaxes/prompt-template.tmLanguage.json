@@ -1,0 +1,55 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Prompt Template",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#comments"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [{
+        "name": "keyword.control.prompt-template",
+        "match": "\\b(id|description|prompt|category|tags|version)\\b"
+      }]
+    },
+    "strings": {
+      "name": "string.quoted.double.prompt-template",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.prompt-template",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "variables": {
+      "name": "variable.other.prompt-template",
+      "match": "\\{\\{[^}]+\\}\\}"
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.prompt-template",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.prompt-template",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.prompt-template"
+}

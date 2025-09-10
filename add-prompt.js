@@ -11,6 +11,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline';
 import { validatePrompt } from './validate-prompt.js';
+import { suggestNextVersion, analyzePromptChanges, compareVersions } from './version-utils.js';
+import { generatePromptChangelog, updateMainChangelog } from './changelog-generator.js';
 
 // CLI Tool Version
 const CLI_VERSION = '1.0.0';
@@ -207,9 +209,45 @@ async function collectPromptData() {
   const tags = await askForTags(category);
 
   // Get version
-  const version = await ask('Version (semantic format)', '1.0.0', (value) => {
+  let version = await ask('Version (semantic format)', '1.0.0', (value) => {
     return /^[0-9]+\.[0-9]+\.[0-9]+$/.test(value);
   });
+  
+  // If this is an update to an existing prompt, suggest next version
+  const registryPath = path.join(process.cwd(), 'registry.json');
+  if (fs.existsSync(registryPath)) {
+    const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+    if (registry[id]) {
+      const currentVersion = registry[id].latest;
+      console.log(`\nℹ️  Current version of this prompt is ${currentVersion}`);
+      
+      // Analyze changes if we have both old and new prompt
+      const oldPrompt = registry[id].versions[currentVersion];
+      const newPromptData = {
+        description,
+        prompt,
+        category,
+        tags
+      };
+      
+      const changes = analyzePromptChanges(oldPrompt, newPromptData);
+      const suggestedVersion = suggestNextVersion(currentVersion, changes, changes.hasBreakingChanges, changes.hasNewFeatures, changes.hasBugFixes);
+      
+      console.log(`🤖 Suggested version: ${suggestedVersion}`);
+      if (changes.hasBreakingChanges) console.log('   ⚠️  Contains breaking changes');
+      if (changes.hasNewFeatures) console.log('   ✨ Contains new features');
+      if (changes.hasBugFixes) console.log('   🐛 Contains bug fixes');
+      
+      const useSuggested = await confirm(`Use suggested version ${suggestedVersion}`, true);
+      if (useSuggested) {
+        version = suggestedVersion;
+      } else {
+        version = await ask('Version (semantic format)', suggestedVersion, (value) => {
+          return /^[0-9]+\.[0-9]+\.[0-9]+$/.test(value);
+        });
+      }
+    }
+  }
 
   const promptData = {
     id,
@@ -292,29 +330,66 @@ async function addToRegistry(promptData) {
 
     // Check for existing prompt
     if (registry[promptData.id]) {
-      const overwrite = await confirm(`Prompt "${promptData.id}" already exists. Overwrite`, false);
-      if (!overwrite) {
-        console.log('❌ Cancelled adding to registry.');
-        return;
-      }
-    }
-
-    // Add the new prompt with version structure
-    registry[promptData.id] = {
-      latest: promptData.version,
-      versions: {
-        [promptData.version]: {
-          description: promptData.description,
-          prompt: promptData.prompt,
-          category: promptData.category,
-          tags: promptData.tags,
-          version: promptData.version
+      // Instead of overwriting, add as a new version
+      const existingEntry = registry[promptData.id];
+      const existingVersions = Object.keys(existingEntry.versions);
+      
+      // Check if this version already exists
+      if (existingEntry.versions[promptData.version]) {
+        const overwrite = await confirm(`Version ${promptData.version} of prompt "${promptData.id}" already exists. Overwrite`, false);
+        if (!overwrite) {
+          console.log('❌ Cancelled adding to registry.');
+          return;
         }
       }
-    };
+      
+      // Get the current latest version for changelog generation
+      const oldPrompt = existingEntry.versions[existingEntry.latest];
+      const newPrompt = {
+        description: promptData.description,
+        prompt: promptData.prompt,
+        category: promptData.category,
+        tags: promptData.tags,
+        version: promptData.version
+      };
+      
+      // Generate changelog
+      const changelogEntry = generatePromptChangelog(promptData.id, oldPrompt, newPrompt, promptData.version);
+      
+      // Add the new version
+      existingEntry.versions[promptData.version] = newPrompt;
+      
+      // Update latest if this is a newer version
+      const versionComparison = compareVersions(promptData.version, existingEntry.latest);
+      if (versionComparison > 0) {
+        const previousLatest = existingEntry.latest;
+        existingEntry.latest = promptData.version;
+        console.log(`🆕 Updated "${promptData.id}" to version ${promptData.version} (new latest)`);
+        
+        // Update main changelog
+        updateMainChangelog(changelogEntry);
+        console.log(`📝 Changelog updated for version ${promptData.version}`);
+      } else {
+        console.log(`➕ Added version ${promptData.version} to "${promptData.id}"`);
+      }
+    } else {
+      // Add the new prompt with version structure
+      registry[promptData.id] = {
+        latest: promptData.version,
+        versions: {
+          [promptData.version]: {
+            description: promptData.description,
+            prompt: promptData.prompt,
+            category: promptData.category,
+            tags: promptData.tags,
+            version: promptData.version
+          }
+        }
+      };
+      console.log(`➕ Added new prompt "${promptData.id}" version ${promptData.version} to registry.json`);
+    }
 
     fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2), 'utf8');
-    console.log(`➕ Added "${promptData.id}" to registry.json`);
   } catch (error) {
     console.error(`❌ Failed to add to registry: ${error.message}`);
   }

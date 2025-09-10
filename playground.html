@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Template Registry - Playground</title>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #818cf8;
+            --background-color: #f8fafc;
+            --card-color: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #cbd5e1;
+        }
+
+        .variables-section {
+            margin-top: 1rem;
+        }
+
+        .variable-input {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .variable-input input:first-child {
+            flex: 1;
+        }
+
+        .output-section {
+            margin-top: 1rem;
+        }
+
+        .output-content {
+            background-color: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1rem;
+            min-height: 150px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .prompt-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .prompt-item {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .prompt-item:hover {
+            border-color: var(--primary-color);
+        }
+
+        .prompt-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .prompt-item p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #ede9fe;
+            color: #6d28d9;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            margin-right: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .notification {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .notification.success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .notification.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>🧠 Prompt Template Registry Playground</h1>
+                <button id="loadRegistryBtn">Load Registry</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="notification hidden" id="notification">
+            <span id="notificationMessage"></span>
+        </div>
+
+        <div class="main-content">
+            <div class="left-column">
+                <div class="card">
+                    <h2>🔍 Browse Prompts</h2>
+                    <div class="form-group">
+                        <input type="text" id="searchInput" placeholder="Search prompts...">
+                    </div>
+                    <div class="prompt-list" id="promptList">
+                        <!-- Prompt items will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="card">
+                    <h2>🧪 Test Prompt</h2>
+                    <div class="form-group">
+                        <label for="promptId">Prompt ID</label>
+                        <input type="text" id="promptId" placeholder="Enter prompt ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="promptTemplate">Prompt Template</label>
+                        <textarea id="promptTemplate" placeholder="Enter prompt template with {{variables}}"></textarea>
+                    </div>
+                    <div class="variables-section" id="variablesSection">
+                        <h3>Variables</h3>
+                        <div id="variablesContainer">
+                            <!-- Variable inputs will be added here -->
+                        </div>
+                        <button type="button" id="addVariableBtn" class="btn-secondary">+ Add Variable</button>
+                    </div>
+                    <button id="testPromptBtn">Test Prompt</button>
+                </div>
+
+                <div class="card">
+                    <h2>📤 Output</h2>
+                    <div class="output-section">
+                        <div class="output-content" id="outputContent">
+                            Your prompt output will appear here...
+                        </div>
+                    </div>
+                    <button id="copyOutputBtn" class="btn-secondary">Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample registry data for demonstration
+        const sampleRegistry = {
+            "sql_query_generation": {
+                "latest": "2.0.0",
+                "versions": {
+                    "1.0.0": {
+                        "description": "Generates SQL queries from natural language requests",
+                        "prompt": "Translate this natural language request into an SQL query:\n\nRequest: {{request}}\n\nSQL Query:",
+                        "category": "development",
+                        "tags": ["sql", "database", "query"],
+                        "version": "1.0.0"
+                    },
+                    "2.0.0": {
+                        "description": "Generates SQL queries from natural language requests",
+                        "prompt": "Translate this natural language request into an SQL query. Ensure the query is optimized and secure.\n\nRequest: {{request}}\n\nSQL Query:",
+                        "category": "development",
+                        "tags": ["sql", "database", "query"],
+                        "version": "2.0.0"
+                    }
+                }
+            },
+            "code_explanation": {
+                "latest": "2.0.0",
+                "versions": {
+                    "1.0.0": {
+                        "description": "Provides detailed explanations for given code snippets",
+                        "prompt": "Explain what this code does in simple terms:\n\n{{code}}\n\nExplanation:",
+                        "category": "development",
+                        "tags": ["code", "explanation", "tutorial"],
+                        "version": "1.0.0"
+                    },
+                    "2.0.0": {
+                        "description": "Provides detailed explanations for given code snippets",
+                        "prompt": "Explain what this code does in simple terms (assume the user is a beginner):\n\n{{code}}\n\nExplanation:",
+                        "category": "development",
+                        "tags": ["code", "explanation", "tutorial"],
+                        "version": "2.0.0"
+                    }
+                }
+            }
+        };
+
+        // DOM elements
+        const loadRegistryBtn = document.getElementById('loadRegistryBtn');
+        const searchInput = document.getElementById('searchInput');
+        const promptList = document.getElementById('promptList');
+        const promptId = document.getElementById('promptId');
+        const promptTemplate = document.getElementById('promptTemplate');
+        const variablesSection = document.getElementById('variablesSection');
+        const variablesContainer = document.getElementById('variablesContainer');
+        const addVariableBtn = document.getElementById('addVariableBtn');
+        const testPromptBtn = document.getElementById('testPromptBtn');
+        const outputContent = document.getElementById('outputContent');
+        const copyOutputBtn = document.getElementById('copyOutputBtn');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notificationMessage');
+
+        // Global state
+        let registry = {};
+        let variables = {};
+
+        // Initialize the playground
+        function init() {
+            // Load sample registry data
+            registry = sampleRegistry;
+            renderPromptList();
+            
+            // Set up event listeners
+            loadRegistryBtn.addEventListener('click', loadRegistry);
+            searchInput.addEventListener('input', handleSearch);
+            addVariableBtn.addEventListener('click', addVariableInput);
+            testPromptBtn.addEventListener('click', testPrompt);
+            copyOutputBtn.addEventListener('click', copyOutput);
+            
+            // Initially hide variables section
+            variablesSection.classList.add('hidden');
+        }
+
+        // Load registry data (in a real implementation, this would fetch from the actual registry)
+        function loadRegistry() {
+            showNotification('Registry loaded successfully!', 'success');
+            renderPromptList();
+        }
+
+        // Render the prompt list
+        function renderPromptList() {
+            promptList.innerHTML = '';
+            
+            Object.entries(registry).forEach(([id, promptEntry]) => {
+                const latestVersion = promptEntry.versions[promptEntry.latest];
+                
+                const promptItem = document.createElement('div');
+                promptItem.className = 'prompt-item';
+                promptItem.innerHTML = `
+                    <h3>${id}</h3>
+                    <p>${latestVersion.description}</p>
+                    <div>
+                        ${latestVersion.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                `;
+                
+                promptItem.addEventListener('click', () => {
+                    selectPrompt(id, latestVersion);
+                });
+                
+                promptList.appendChild(promptItem);
+            });
+        }
+
+        // Handle search input
+        function handleSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            // In a real implementation, this would filter the actual registry
+            // For now, we'll just show all prompts
+            renderPromptList();
+        }
+
+        // Select a prompt for testing
+        function selectPrompt(id, promptData) {
+            promptId.value = id;
+            promptTemplate.value = promptData.prompt;
+            
+            // Extract variables from the prompt
+            extractVariablesFromPrompt(promptData.prompt);
+            
+            // Show variables section if there are variables
+            if (Object.keys(variables).length > 0) {
+                variablesSection.classList.remove('hidden');
+            } else {
+                variablesSection.classList.add('hidden');
+            }
+        }
+
+        // Extract variables from a prompt template
+        function extractVariablesFromPrompt(prompt) {
+            // Clear existing variables
+            variables = {};
+            variablesContainer.innerHTML = '';
+            
+            // Find all variables in the format {{variableName}}
+            const variableMatches = prompt.match(/\{\{([^}]+)\}\}/g);
+            
+            if (variableMatches) {
+                // Create a set to get unique variable names
+                const uniqueVariables = [...new Set(variableMatches.map(v => v.slice(2, -2)))];
+                
+                uniqueVariables.forEach(variable => {
+                    variables[variable] = '';
+                    addVariableInput(variable);
+                });
+            }
+        }
+
+        // Add a variable input field
+        function addVariableInput(variableName = '') {
+            const variableInput = document.createElement('div');
+            variableInput.className = 'variable-input';
+            
+            const variableNameInput = document.createElement('input');
+            variableNameInput.type = 'text';
+            variableNameInput.placeholder = 'Variable name';
+            variableNameInput.value = variableName;
+            
+            const variableValueInput = document.createElement('input');
+            variableValueInput.type = 'text';
+            variableValueInput.placeholder = 'Variable value';
+            variableValueInput.dataset.variable = variableName;
+            
+            // If we have a predefined variable, set its value
+            if (variableName && variables[variableName] !== undefined) {
+                variableValueInput.value = variables[variableName];
+            }
+            
+            // Add event listeners to update the variables object
+            variableNameInput.addEventListener('input', (e) => {
+                const oldName = variableValueInput.dataset.variable;
+                const newName = e.target.value;
+                
+                // Update the dataset
+                variableValueInput.dataset.variable = newName;
+                
+                // Update the variables object
+                if (oldName && variables[oldName] !== undefined) {
+                    delete variables[oldName];
+                }
+                variables[newName] = variableValueInput.value;
+            });
+            
+            variableValueInput.addEventListener('input', (e) => {
+                const variableName = e.target.dataset.variable;
+                if (variableName) {
+                    variables[variableName] = e.target.value;
+                }
+            });
+            
+            variableInput.appendChild(variableNameInput);
+            variableInput.appendChild(variableValueInput);
+            
+            variablesContainer.appendChild(variableInput);
+        }
+
+        // Test the prompt with the provided variables
+        function testPrompt() {
+            const template = promptTemplate.value;
+            
+            if (!template) {
+                showNotification('Please enter a prompt template', 'error');
+                return;
+            }
+            
+            // Interpolate variables into the template
+            let result = template;
+            Object.entries(variables).forEach(([name, value]) => {
+                const regex = new RegExp(`\\{\\{${name}\\}\\}`, 'g');
+                result = result.replace(regex, value || '');
+            });
+            
+            // Check for any remaining variables that weren't provided
+            const remainingVariables = result.match(/\{\{([^}]+)\}\}/g);
+            if (remainingVariables) {
+                showNotification(`Missing values for variables: ${remainingVariables.join(', ')}`, 'error');
+                return;
+            }
+            
+            // Display the result
+            outputContent.textContent = result;
+            showNotification('Prompt tested successfully!', 'success');
+        }
+
+        // Copy output to clipboard
+        function copyOutput() {
+            const text = outputContent.textContent;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('Output copied to clipboard!', 'success');
+                }).catch(err => {
+                    showNotification('Failed to copy output: ' + err, 'error');
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showNotification('Output copied to clipboard!', 'success');
+                } catch (err) {
+                    showNotification('Failed to copy output: ' + err, 'error');
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            notificationMessage.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.remove('hidden');
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

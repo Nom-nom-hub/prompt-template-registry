@@ -1,12 +1,19 @@
 {
   "name": "prompt-registry",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A library for retrieving and searching reusable prompt templates with remote synchronization",
   "type": "module",
   "main": "index.mjs",
   "types": "index.d.ts",
   "scripts": {
     "test": "node test.mjs",
+    "test:versioning": "node test-versioning.js",
+    "test:changelog": "node test-changelog.js",
+    "test:search": "node test-advanced-search.js",
+    "test:quality": "node test-quality-analysis.js",
+    "test:llm": "node test-multi-llm.js",
+    "test:workflows": "node test-workflows.js",
+    "test:enterprise": "node test-enterprise.js",
     "sync": "node --experimental-fetch index.mjs sync",
     "validate:prompt": "node validate-prompt.js",
     "prepare": "husky install"

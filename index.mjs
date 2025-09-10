@@ -664,10 +664,10 @@ startPeriodicSync();
 
 /**
  * Retrieves a prompt by ID (with optional version) and interpolates variables.
- * Enhanced with optional auto-sync functionality
+ * Enhanced with optional auto-sync functionality and model-specific variants
  * @param {string} id - The unique ID of the prompt, optionally with @version suffix.
  * @param {Object} variables - An object with variable names as keys and their values for substitution.
- * @param {GetOptions} options - Additional options for sync behavior
+ * @param {GetOptions} options - Additional options for sync behavior and model selection
  * @returns {Object} The version-aware prompt metadata with interpolated prompt.
  * @throws {Error} If the prompt ID or version is not found.
  */
@@ -695,7 +695,13 @@ export function get(id, variables = {}, options = {}) {
     throw new Error(`Version "${version}" not available for "${baseId}"`);
   }
 
+  // Get model-specific variant if requested
   let prompt = promptData.prompt;
+  if (options.model) {
+    prompt = getPromptVariant(promptData, options.model);
+  }
+
+  // Interpolate variables
   for (const [key, value] of Object.entries(variables)) {
     prompt = prompt.replace(new RegExp(`\\{\\{${key}\\}\\}`, 'g'), value || '');
   }
@@ -796,27 +802,17 @@ export function search(query, options = {}) {
   return filtered;
 }
 
-/**
- * Auto-sync and retry search for empty results
- * @param {string|SearchOptions} query - Original search query
- * @param {SearchOptions} options - Search options
- * @returns {Array} Enhanced prompt metadata
- */
-async function syncAndRetrySearch(query, options) {
-  try {
-    await sync({
-      url: options.syncUrl,
-      timeout: options.timeout || 10000,
-      errorPolicy: 'throw',
-      silent: true
-    });
-
-    return search(query, { ...options, syncOnEmpty: false }); // Retry without sync to avoid infinite loop
-  } catch (error) {
-    console.warn(`Search sync failed: ${error.message}`);
-    return []; // Return empty array if sync fails
-  }
-}
-
 // Export the registry for debugging or direct access
 export { registry };
+
+// Export advanced search functionality
+export { semanticSearch, recommendPrompts, advancedFilter } from './advanced-search.js';
+
+// Export quality analysis functionality
+export { analyzePrompt, calculateQualityScore } from './quality-analysis.js';
+
+// Export multi-LLM variants functionality
+export { getPromptVariant, getModelCategory } from './multi-llm-variants.js';
+
+// Export workflow functionality
+export { executeWorkflow, createWorkflow, validateWorkflow } from './workflows.js';

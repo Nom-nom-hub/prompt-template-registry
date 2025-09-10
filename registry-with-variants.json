@@ -1,0 +1,50 @@
+{
+  "sql_query_generation": {
+    "latest": "2.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Generates SQL queries from natural language requests",
+        "prompt": "Translate this natural language request into an SQL query:\n\nRequest: {{request}}\n\nSQL Query:",
+        "category": "development",
+        "tags": ["sql", "database", "query"],
+        "version": "1.0.0"
+      },
+      "2.0.0": {
+        "description": "Generates SQL queries from natural language requests",
+        "prompt": "Translate this natural language request into an SQL query. Ensure the query is optimized and secure.\n\nRequest: {{request}}\n\nSQL Query:",
+        "category": "development",
+        "tags": ["sql", "database", "query"],
+        "version": "2.0.0",
+        "variants": {
+          "gpt": "Translate this natural language request into an optimized SQL query. Ensure the query follows best practices for performance and security.\n\nRequest: {{request}}\n\nSQL Query:",
+          "claude": "Convert the following natural language request into a secure and efficient SQL query.\n\nRequest: {{request}}\n\nSQL Query:",
+          "llama": "Generate an SQL query based on this request. Optimize for performance and apply security best practices.\n\nRequest: {{request}}\n\nSQL Query:"
+        }
+      }
+    }
+  },
+  "code_explanation": {
+    "latest": "2.0.0",
+    "versions": {
+      "1.0.0": {
+        "description": "Provides detailed explanations for given code snippets",
+        "prompt": "Explain what this code does in simple terms:\n\n{{code}}\n\nExplanation:",
+        "category": "development",
+        "tags": ["code", "explanation", "tutorial"],
+        "version": "1.0.0"
+      },
+      "2.0.0": {
+        "description": "Provides detailed explanations for given code snippets",
+        "prompt": "Explain what this code does in simple terms (assume the user is a beginner):\n\n{{code}}\n\nExplanation:",
+        "category": "development",
+        "tags": ["code", "explanation", "tutorial"],
+        "version": "2.0.0",
+        "variants": {
+          "gpt": "Explain this code as if you were teaching a complete beginner. Use simple language and provide examples.\n\nCode:\n{{code}}\n\nExplanation:",
+          "claude": "Provide a clear, beginner-friendly explanation of this code. Break down complex concepts.\n\nCode:\n{{code}}\n\nExplanation:",
+          "llama": "Explain the following code in simple terms. Assume no prior programming knowledge.\n\nCode:\n{{code}}\n\nExplanation:"
+        }
+      }
+    }
+  }
+}
