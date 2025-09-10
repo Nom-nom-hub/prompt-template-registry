@@ -1,11 +1,20 @@
 # 📝 Prompt Template Registry
 
-<p align=\"center\">
-  <img src=\"https://img.shields.io/npm/v/prompt-registry\" alt=\"npm version\">
-  <img src=\"https://img.shields.io/npm/dw/prompt-registry\" alt=\"npm downloads\">
-  <img src=\"https://img.shields.io/github/license/Nom-nom-hub/prompt-template-registry\" alt=\"license\">
-  <img src=\"https://img.shields.io/github/stars/Nom-nom-hub/prompt-template-registry\" alt=\"GitHub stars\">
+<p style="text-align: center;">
+  <a href="https://www.npmjs.com/package/prompt-registry">
+    <img src="https://img.shields.io/npm/v/prompt-registry?style=flat" alt="npm version">
+  </a>
+  <a href="https://www.npmjs.com/package/prompt-registry">
+    <img src="https://img.shields.io/npm/dw/prompt-registry?style=flat" alt="npm downloads">
+  </a>
+  <a href="https://github.com/Nom-nom-hub/prompt-template-registry/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Nom-nom-hub/prompt-template-registry?style=flat" alt="license">
+  </a>
+  <a href="https://github.com/Nom-nom-hub/prompt-template-registry/stargazers">
+    <img src="https://img.shields.io/github/stars/Nom-nom-hub/prompt-template-registry?style=flat" alt="GitHub stars">
+  </a>
 </p>
+
 
 ## ✨ Overview
 
@@ -72,7 +81,7 @@ const filteredPrompts = search({}, {
 });
 ```
 
-## 🆕 What's New (Version 3.0.0)
+## 🆕 What's New (Version 4.0.0)
 
 Our latest release includes significant enhancements to make the Prompt Template Registry even more powerful:
 

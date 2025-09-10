@@ -49,3 +49,6 @@ coverage/
 # Runtime data
 *.pid
 *.seed
+
+# VS-CODE EXTENSION
+vscode-extension/
